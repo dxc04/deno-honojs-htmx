@@ -18,35 +18,17 @@ app.use('*', async (c: Context, next) => {
 
 // todo: move navLinks as constants to a file
 const navLinks = [
-/*  {
+  {
     group: "",
     links: [
       { name: "Dashboard", icon: "dashboard" },
-    ],
-  }, */
-  {
-    group: "Community",
-    links: [
-      { name: "Message Board", icon: "message-board" },
-      { name: "Messages", icon: "messages" },
+      { name: "Profile", icon: "profile" },
     ],
   },
   {
     group: "Manage",
     links: [
       { name: "Members", icon: "members" },
-      { name: "Requests", icon: "requests" },
-      { name: "Violations", icon: "violations" },
-      { name: "Documents", icon: "documents" },
-      { name: "Events", icon: "events" },
-      { name: "Work Permits", icon: "work-permits" },
-    ],
-  },
-  {
-    group: "Financials",
-    links: [
-      { name: "Billing", icon: "billing" },
-      { name: "Reports", icon: "reports" },
     ],
   },
 ];
@@ -56,10 +38,11 @@ app.get("/", async (c: Context) => {
   //const userId = session.get("userId");
 
   const template = await vto.run("./views/layouts/app.vto", {
-    title: "Sweet Homes with Dwello",
     navLinks: navLinks,
+    title: Deno.env.get("TITLE"),
     appName: Deno.env.get("APP_NAME"),
   });
+
   vto.cache.clear();
   return c.html(template.content);
 });

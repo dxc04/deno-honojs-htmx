@@ -52,4 +52,6 @@ app.route("/app", appPage);
 app.route("/register", registerPage);
 app.route("/login", LoginPage);
 
-Deno.serve(app.fetch);
+//Deno.serve(app.fetch);
+Deno.serve({ port: 8787 }, app.fetch) 
+
