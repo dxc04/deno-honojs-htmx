@@ -5,5 +5,5 @@ Initialize and run
 ```bash
 cp .env.example .env
 deno run install-init
-deno start
+deno run start
 ```
