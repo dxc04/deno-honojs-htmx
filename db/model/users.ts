@@ -19,6 +19,15 @@ export async function findUserByEmail(email: string) {
   return user;
 }
 
+export async function findByUserId(id: string) {
+  const [user] = await db
+    .select()
+    .from(users)
+    .where(eq(users.id, id));
+
+  return user;
+}
+
 export async function hashPassword(password: string) {
   return await hashSync(password, genSaltSync(12));
 }
