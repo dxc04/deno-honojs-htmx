@@ -1,4 +1,4 @@
-import { Hono } from "hono";
+import { Context, Hono } from "hono";
 import { serveStatic } from "hono/deno";
 
 import "jsr:@std/dotenv/load";
@@ -39,7 +39,7 @@ app.use(
 app.use("/static/*", serveStatic({ root: "./" }));
 
 app.get("/", async (c) => {
-  vto.cache.clear();
+
   const template = await vto.run("./views/layouts/landing.vto", {
     title: Deno.env.get("APP_TITLE"),
     appName: Deno.env.get("APP_NAME")
@@ -52,6 +52,5 @@ app.route("/app", appPage);
 app.route("/register", registerPage);
 app.route("/login", LoginPage);
 
-//Deno.serve(app.fetch);
-Deno.serve({ port: 8787 }, app.fetch) 
 
+Deno.serve(app.fetch);

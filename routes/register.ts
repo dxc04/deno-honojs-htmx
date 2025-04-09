@@ -14,8 +14,6 @@ app.get("/", async (c) => {
     appName: appName,
   });
 
-  vto.cache.clear();
-
   return c.html(template.content);
 });
 
@@ -25,7 +23,7 @@ app.post(
     "form",
     registerFormSchema,
     async (result, c: Hono.Context) => {
-      vto.cache.clear();
+
       if (!result.success) {
         const template = await vto.run(
           "./views/partials/register_form.vto",
